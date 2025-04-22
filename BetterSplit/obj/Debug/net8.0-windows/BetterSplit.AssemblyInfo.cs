@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BetterSplit")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8e928e407c23fd087cbfcde57455c65a5c9863e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c161181ae364eb83a295ec3e4c69649367ac3ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("BetterSplit")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BetterSplit")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

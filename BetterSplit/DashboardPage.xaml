@@ -82,7 +82,7 @@
                 </Border>
             </TabItem>
 
-            
+
 
             <!-- Group Summary Tab -->
             <TabItem Header="Group Summary" Background="Transparent">
@@ -91,72 +91,71 @@
                         <StackPanel>
                             <!-- Header -->
                             <TextBlock Text="Group Summary" 
-                           FontSize="18" 
-                           FontWeight="Bold" 
-                           Foreground="White" 
-                           Margin="0,0,0,20" 
-                           HorizontalAlignment="Center"/>
-                            <Button Content="Export to CSV" Click="ExportToFile_Click" Width="100"/>
-
+                       FontSize="18" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       Margin="0,0,0,20" 
+                       HorizontalAlignment="Center"/>
+                            <Button Content="Export to CSV" Click="ExportToFile_Click" Width="100" Margin="0,0,0,20"/>
 
                             <!-- Balances Section -->
                             <Border Background="#FF2D3250" 
-                        CornerRadius="5" 
-                        Padding="15" 
-                        Margin="0,0,0,20" Height="50">
+                    CornerRadius="5" 
+                    Padding="15" 
+                    Margin="0,0,0,20">
                                 <StackPanel>
                                     <TextBlock Text="Current Balances" 
-                                   FontSize="16" 
-                                   FontWeight="SemiBold" 
-                                   Foreground="White" 
-                                   Margin="0,0,0,15" 
-                                   HorizontalAlignment="Center"/>
+                               FontSize="16" 
+                               FontWeight="SemiBold" 
+                               Foreground="White" 
+                               Margin="0,0,0,10" 
+                               HorizontalAlignment="Center"/>
 
                                     <ListView x:Name="lstBalances" 
-                                  Background="Transparent" 
-                                  BorderThickness="0">
+                              Background="Transparent" 
+                              BorderThickness="0"
+                              Height="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                                         <ListView.ItemContainerStyle>
                                             <Style TargetType="ListViewItem">
                                                 <Setter Property="Padding" Value="0"/>
                                                 <Setter Property="Margin" Value="0,5"/>
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" 
-                                                Margin="0,5">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
                                                     <TextBlock Text="{Binding MemberName}" 
-                                                   Width="180" 
-                                                   Foreground="White"
-                                                   VerticalAlignment="Center"/>
+                                               Foreground="White"
+                                               VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding Balance, StringFormat={}{0:C2}}"
-                                                   Margin="10,0,0,0">
+                                               Grid.Column="1"
+                                               Margin="10,0,0,0">
                                                         <TextBlock.Style>
                                                             <Style TargetType="TextBlock">
                                                                 <Setter Property="Foreground" Value="White"/>
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Balance}" Value="{x:Static sys:Decimal.Zero}">
+                                                                    <DataTrigger Binding="{Binding Balance}" Value="0">
                                                                         <Setter Property="Foreground" Value="White"/>
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Balance}">
-                                                                        <DataTrigger.Value>
-                                                                            <sys:Decimal>0</sys:Decimal>
-                                                                        </DataTrigger.Value>
                                                                         <Setter Property="Foreground" Value="LightGreen"/>
                                                                     </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Balance}">
-                                                                        <DataTrigger.Value>
-                                                                            <sys:Decimal>-0.01</sys:Decimal>
-                                                                        </DataTrigger.Value>
+                                                                    <DataTrigger Binding="{Binding Balance}" Value="-0.01">
                                                                         <Setter Property="Foreground" Value="LightCoral"/>
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
                                                             </Style>
                                                         </TextBlock.Style>
                                                     </TextBlock>
-                                                </StackPanel>
+                                                </Grid>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
@@ -165,47 +164,52 @@
 
                             <!-- Expense History Section -->
                             <Border Background="#FF2D3250" 
-                        CornerRadius="5" 
-                        Padding="15" 
-                        Margin="0,0,0,20" Height="50">
+                    CornerRadius="5" 
+                    Padding="15" 
+                    Margin="0,0,0,20">
                                 <StackPanel>
                                     <TextBlock Text="Expense History" 
-                                   FontSize="16" 
-                                   FontWeight="SemiBold" 
-                                   Foreground="White" 
-                                   Margin="0,0,0,15" 
-                                   HorizontalAlignment="Center"/>
+                               FontSize="16" 
+                               FontWeight="SemiBold" 
+                               Foreground="White" 
+                               Margin="0,0,0,10" 
+                               HorizontalAlignment="Center"/>
 
                                     <ListView x:Name="lstExpenses" 
-                                  Background="Transparent" 
-                                  BorderThickness="0">
+                              Background="Transparent" 
+                              BorderThickness="0"
+                              Height="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                                         <ListView.ItemContainerStyle>
                                             <Style TargetType="ListViewItem">
                                                 <Setter Property="Padding" Value="0"/>
                                                 <Setter Property="Margin" Value="0,5"/>
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Margin="0,10">
-                                                    <TextBlock Text="{Binding Description}" 
+                                                <Border Padding="5" BorderBrush="#FF444444" BorderThickness="0,0,0,1">
+                                                    <StackPanel Margin="0,5">
+                                                        <TextBlock Text="{Binding Description}" 
                                                    FontWeight="Bold" 
                                                    Foreground="White"
                                                    Margin="0,0,0,5"/>
-                                                    <StackPanel Orientation="Horizontal" 
+                                                        <StackPanel Orientation="Horizontal" 
                                                     Margin="0,0,0,5">
-                                                        <TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}" 
+                                                            <TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}" 
                                                        Foreground="#FFAAAAAA" 
                                                        Margin="0,0,15,0"/>
-                                                        <TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}" 
+                                                            <TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}" 
                                                        Foreground="#FFAAAAAA"/>
-                                                    </StackPanel>
-                                                    <TextBlock Text="{Binding Date, StringFormat='Date: {0:MMM dd, yyyy}'}" 
+                                                        </StackPanel>
+                                                        <TextBlock Text="{Binding Date, StringFormat='Date: {0:MMM dd, yyyy}'}" 
                                                    Foreground="#FF888888" 
                                                    FontSize="11"/>
-                                                </StackPanel>
+                                                    </StackPanel>
+                                                </Border>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
@@ -214,45 +218,54 @@
 
                             <!-- Transaction History Section -->
                             <Border Background="#FF2D3250" 
-                        CornerRadius="5" 
-                        Padding="15" Height="50">
+                    CornerRadius="5" 
+                    Padding="15">
                                 <StackPanel>
                                     <TextBlock Text="Transaction History" 
-                                   FontSize="16" 
-                                   FontWeight="SemiBold" 
-                                   Foreground="White" 
-                                   Margin="0,0,0,15" 
-                                   HorizontalAlignment="Center"/>
+                               FontSize="16" 
+                               FontWeight="SemiBold" 
+                               Foreground="White" 
+                               Margin="0,0,0,10" 
+                               HorizontalAlignment="Center"/>
 
                                     <ListView x:Name="lstTransactionHistory" 
-                                  Background="Transparent" 
-                                  BorderThickness="0">
+                              Background="Transparent" 
+                              BorderThickness="0"
+                              Height="Auto"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto">
                                         <ListView.ItemContainerStyle>
                                             <Style TargetType="ListViewItem">
                                                 <Setter Property="Padding" Value="0"/>
                                                 <Setter Property="Margin" Value="0,5"/>
                                                 <Setter Property="Background" Value="Transparent"/>
                                                 <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Margin="0,10">
-                                                    <TextBlock Text="{Binding Description}" 
+                                                <Border Padding="5" BorderBrush="#FF444444" BorderThickness="0,0,0,1">
+                                                    <StackPanel Margin="0,5">
+                                                        <TextBlock Text="{Binding Description}" 
                                                    Foreground="White"
                                                    Margin="0,0,0,5"/>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}" 
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}" 
                                                        Foreground="White" 
                                                        Margin="0,0,15,0"/>
-                                                        <TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}" 
+                                                            <TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}" 
                                                        Foreground="White"/>
-                                                    </StackPanel>
-                                                    <TextBlock Text="{Binding Date, StringFormat='Date: {0:MM/dd/yyyy}'}" 
+                                                            <TextBlock Text="{Binding Payee.Name, StringFormat='→ {0}'}" 
+                                                       Foreground="White" 
+                                                       Margin="5,0,0,0"
+                                                       />
+                                                        </StackPanel>
+                                                        <TextBlock Text="{Binding Date, StringFormat='Date: {0:MM/dd/yyyy}'}" 
                                                    Foreground="#FF888888" 
                                                    FontSize="11"
                                                    Margin="0,5,0,0"/>
-                                                </StackPanel>
+                                                    </StackPanel>
+                                                </Border>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
