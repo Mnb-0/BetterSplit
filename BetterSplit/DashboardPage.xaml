@@ -8,6 +8,7 @@
 
     <Grid>
         <TabControl Background="#FF1A1A2E" BorderThickness="0">
+
             <!-- Add Group Tab -->
             <TabItem Header="Add Group" Background="Transparent">
                 <Border Background="#FF1A1A2E" Padding="20" CornerRadius="10" Margin="10">
@@ -42,7 +43,7 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
-            </TabItem>
+            </TabItem
             <!-- Add Expense Tab -->
             <TabItem Header="Add Expense" Background="Transparent">
                 <Border Background="#FF1A1A2E" Padding="20" CornerRadius="10" Margin="10">
@@ -81,7 +82,7 @@
                 </Border>
             </TabItem>
 
-            
+            >
 
             <!-- Group Summary Tab -->
             <TabItem Header="Group Summary" Background="Transparent">
