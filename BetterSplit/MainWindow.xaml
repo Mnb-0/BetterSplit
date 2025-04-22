@@ -1,0 +1,30 @@
+﻿<Window x:Class="BetterSplit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BetterSplit" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF2D3250">
+    <Grid>
+        <!-- Frame for navigation (initially hidden) -->
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Visibility="Collapsed"/>
+
+        <!-- Login Form (initially visible) -->
+        <Border x:Name="LoginForm" Background="#FF1A1A2E" Padding="20" CornerRadius="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="BetterSplit" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Username:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                    <TextBox x:Name="UsernameTextBox" Width="200" Padding="10" FontSize="14" Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E" BorderThickness="1"/>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,20">
+                    <TextBlock Text="Password:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
+                    <PasswordBox x:Name="PasswordBox" Width="200" Padding="10" FontSize="14" Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E" BorderThickness="1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="LoginButton" Content="Login" Width="100" Padding="10" FontSize="14" Background="#FF4CAF50" Foreground="White" BorderBrush="Transparent" Click="LoginButton_Click" Cursor="Hand"/>
+                    <Button x:Name="SignUpButton" Content="Sign Up" Width="100" Padding="10" FontSize="14" Background="#FF2196F3" Foreground="White" BorderBrush="Transparent" Margin="10,0,0,0" Click="SignUpButton_Click" Cursor="Hand"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
