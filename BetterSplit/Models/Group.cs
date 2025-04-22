@@ -19,6 +19,8 @@ namespace BetterSplit.Models
         public List<Member> Members { get; set; }
         public List<Expense> Expenses { get; set; }
 
+        public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+
         public Group(string name)
         {
             Name = name;

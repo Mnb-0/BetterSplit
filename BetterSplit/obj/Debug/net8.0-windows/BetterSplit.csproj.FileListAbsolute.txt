@@ -61,3 +61,4 @@ C:\Users\Muneeb\source\repos\BetterSplit\BetterSplit\obj\Debug\net8.0-windows\re
 C:\Users\Muneeb\source\repos\BetterSplit\BetterSplit\obj\Debug\net8.0-windows\BetterSplit.pdb
 C:\Users\Muneeb\source\repos\BetterSplit\BetterSplit\obj\Debug\net8.0-windows\BetterSplit.genruntimeconfig.cache
 C:\Users\Muneeb\source\repos\BetterSplit\BetterSplit\obj\Debug\net8.0-windows\ref\BetterSplit.dll
+C:\Users\Muneeb\source\repos\BetterSplit\BetterSplit\obj\Debug\net8.0-windows\BetterSplit.sourcelink.json

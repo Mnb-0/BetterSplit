@@ -83,7 +83,17 @@ namespace BetterSplit
                 SplitExpenseEqually(expense);
 
                 _currentGroup.Expenses.Add(expense);
+
+                var transaction = new Transaction(
+                $"Expense: {expense.Description}",
+                expense.Amount,
+                expense.Payer,
+                null);  // No direct payee for expenses
+                _currentGroup.Transactions.Add(transaction);
+
+
                 UpdateBalances();
+                UpdateHistories();
                 ClearExpenseForm();
                 ShowSuccessMessage("Expense added successfully!");
             }
@@ -93,25 +103,6 @@ namespace BetterSplit
             }
         }
 
-        private void SplitExpenseEqually(Expense expense)
-        {
-            decimal share = expense.Amount / _currentGroup.Members.Count;
-
-            // All members owe their share (including the payer)
-            foreach (var member in _currentGroup.Members)
-            {
-                if (member == expense.Payer)
-                {
-                    // The payer paid the full amount, so subtract their own share
-                    member.Balance += (expense.Amount - share);
-                }
-                else
-                {
-                    // Others owe their share
-                    member.Balance -= share;
-                }
-            }
-        }
 
 
         private void SetMembers_Click(object sender, RoutedEventArgs e)
@@ -341,6 +332,15 @@ namespace BetterSplit
 
             MessageBox.Show("Payment settled successfully!");
 
+            var transaction = new Transaction(
+            $"Settlement from {payer.Name} to {payee.Name}",
+            amount,
+            payer,
+            payee);
+            _currentGroup.Transactions.Add(transaction);
+
+            UpdateHistories();
+
             // Clear fields
             txtSettleAmount.Text = "";
             cmbSettlePayer.SelectedItem = null;
@@ -352,7 +352,35 @@ namespace BetterSplit
                 LoadBalanceDisplay();
             }
         }
+        private void SplitExpenseEqually(Expense expense)
+        {
+            decimal share = expense.Amount / _currentGroup.Members.Count;
 
+            foreach (var member in _currentGroup.Members)
+            {
+                if (member != expense.Payer)
+                {
+                    // Each non-payer member owes their share to the payer
+                    member.Balance -= share;
+                    expense.Payer.Balance += share;
+                }
+            }
+        }
+        private void UpdateHistories()
+        {
+            // Update expense history
+            lstExpenses.ItemsSource = null;
+            lstExpenses.ItemsSource = _currentGroup.Expenses;
+
+            // Update transaction history
+            lstTransactionHistory.ItemsSource = null;
+            lstTransactionHistory.ItemsSource = _currentGroup.Transactions
+                .OrderByDescending(t => t.Date)
+                .ToList();
+
+            // Update balances
+            LoadBalanceDisplay();
+        }
 
     }
 }
