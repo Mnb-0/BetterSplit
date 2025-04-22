@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media;
 using BetterSplit.Models;
+using Microsoft.Win32;
 
 namespace BetterSplit
 {
@@ -382,5 +385,59 @@ namespace BetterSplit
             LoadBalanceDisplay();
         }
 
+        // Export expenses and balances to a CSV file
+        private void ExportToFile_Click(object sender, RoutedEventArgs e)
+        {
+            // Open Save File Dialog
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "CSV Files (*.csv)|*.csv",
+                DefaultExt = ".csv",
+                AddExtension = true
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filePath = saveFileDialog.FileName;
+                try
+                {
+                    // Call the method to export data
+                    ExportDataToCsv(filePath);
+                    MessageBox.Show("Data exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error exporting data: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void ExportDataToCsv(string filePath)
+        {
+            StringBuilder csvContent = new StringBuilder();
+
+            // Add CSV headers
+            csvContent.AppendLine("Description,Amount,Payer,Member,Share");
+
+            // Export Expenses and Shares
+            foreach (var expense in _currentGroup.Expenses)
+            {
+                decimal share = expense.Amount / _currentGroup.Members.Count;
+                foreach (var member in _currentGroup.Members)
+                {
+                    csvContent.AppendLine($"{EscapeCsv(expense.Description)},{expense.Amount},{EscapeCsv(expense.Payer.Name)},{EscapeCsv(member.Name)},{share}");
+                }
+            }
+
+            // Write to file
+            File.WriteAllText(filePath, csvContent.ToString(), Encoding.UTF8);
+        }
+
+        private string EscapeCsv(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            if (input.Contains(",")) return $"\"{input}\"";
+            return input;
+        }
     }
 }
