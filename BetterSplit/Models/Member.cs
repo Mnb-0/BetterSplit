@@ -18,7 +18,6 @@ namespace BetterSplit.Models
             Name = string.Empty;
         }
 
-        // Constructor that takes a name as an argument
         public Member(string name)
         {
             Name = name;

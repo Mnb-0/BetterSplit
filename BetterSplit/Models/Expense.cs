@@ -14,7 +14,6 @@ namespace BetterSplit.Models
         public Member Payer { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
 
-        // Constructor to make it easier to create Expense objects
         public Expense(string description, decimal amount, Member payer)
         {
             Description = description;

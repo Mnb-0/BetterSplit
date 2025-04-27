@@ -5,320 +5,474 @@
       Title="Dashboard"
       Background="#FF2D3250">
 
-
     <Grid>
-        <TabControl Background="#FF1A1A2E" BorderThickness="0">
+        <TabControl Background="#FF1A1A2E" BorderThickness="0" Margin="10">
 
             <!-- Add Group Tab -->
             <TabItem Header="Add Group" Background="Transparent">
-                <Border Background="#FF1A1A2E" Padding="20" CornerRadius="10" Margin="10">
+                <Border Background="#FF1A1A2E" Padding="25" CornerRadius="10" Margin="10">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock Text="Create New Group" FontSize="18" FontWeight="Bold" 
-                           Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                        <StackPanel Width="400" HorizontalAlignment="Center">
+                            <TextBlock Text="Create New Group" 
+                                       FontSize="20" 
+                                       FontWeight="Bold"
+                                       Foreground ="White" 
+                                       Margin="0,0,0,25" 
+                                       HorizontalAlignment="Center"/>
 
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Group Name:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <TextBox x:Name="txtGroupName" Width="300" Padding="10" FontSize="14" 
-                             Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E" 
-                             BorderThickness="1"/>
+                            <!-- Group Name -->
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Group Name:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <TextBox x:Name="txtGroupName" 
+                                         Width="380" 
+                                         Padding="12" 
+                                         FontSize="14"
+                                         Background="#FF2D3250" 
+                                         Foreground ="White" 
+                                         BorderBrush="#FF3E3E3E"
+                                         BorderThickness="1"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Number of Members:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <TextBox x:Name="txtNumMembers" Width="300" Padding="10" FontSize="14" 
-                             Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E" 
-                             BorderThickness="1"/>
+                            <!-- Number of Members -->
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Number of Members:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <TextBox x:Name="txtNumMembers" 
+                                         Width="380" 
+                                         Padding="12" 
+                                         FontSize="14"
+                                         Background="#FF2D3250" 
+                                         Foreground ="White" 
+                                         BorderBrush="#FF3E3E3E"
+                                         BorderThickness="1"/>
                             </StackPanel>
 
-                            <Button Content="Set Members" Width="150" Padding="10" FontSize="14" 
-                        Background="#FF2196F3" Foreground="White" BorderBrush="Transparent" 
-                        Margin="0,0,0,20" HorizontalAlignment="Center" Click="SetMembers_Click" Cursor="Hand"/>
+                            <!-- Set Members Button -->
+                            <Button Content="Set Members" 
+                                    Width="200" 
+                                    Padding="12" 
+                                    FontSize="14"
+                                    Background="#FF2196F3" 
+                                    Foreground ="Black" 
+                                    BorderBrush="Transparent"
+                                    Margin="0,0,0,25" 
+                                    HorizontalAlignment="Center" 
+                                    Click="SetMembers_Click" 
+                                    Cursor="Hand"/>
 
-                            <StackPanel x:Name="MembersPanel" Margin="0,0,0,20"/>
+                            <!-- Members List -->
+                            <StackPanel x:Name="MembersPanel" Margin="0,0,0,25"/>
 
-                            <Button Content="Create Group" Width="150" Padding="10" FontSize="14" 
-                        Background="#FF4CAF50" Foreground="White" BorderBrush="Transparent" 
-                        HorizontalAlignment="Center" Click="CreateGroup_Click" Cursor="Hand"/>
+                            <!-- Create Group Button -->
+                            <Button Content="Create Group" 
+                                    Width="200" 
+                                    Padding="12" 
+                                    FontSize="14"
+                                    Background="#FF4CAF50" 
+                                    Foreground ="White" 
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Center" 
+                                    Click="CreateGroup_Click" 
+                                    Cursor="Hand"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
             </TabItem>
+
             <!-- Add Expense Tab -->
             <TabItem Header="Add Expense" Background="Transparent">
-                <Border Background="#FF1A1A2E" Padding="20" CornerRadius="10" Margin="10">
+                <Border Background="#FF1A1A2E" Padding="25" CornerRadius="10" Margin="10">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock Text="Add New Expense" FontSize="18" FontWeight="Bold" 
-                                       Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                        <StackPanel Width="400" HorizontalAlignment="Center">
+                            <TextBlock Text="Add New Expense" 
+                                       FontSize="20" 
+                                       FontWeight="Bold"
+                                       Foreground ="White" 
+                                       Margin="0,0,0,25" 
+                                       HorizontalAlignment="Center"/>
 
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Expense Name:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <TextBox x:Name="txtExpenseName" Width="300" Padding="10" FontSize="14" 
-                                         Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E" 
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Expense Name:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <TextBox x:Name="txtExpenseName" 
+                                         Width="380" 
+                                         Padding="12" 
+                                         FontSize="14"
+                                         Background="#FF2D3250" 
+                                         Foreground ="White" 
+                                         BorderBrush="#FF3E3E3E"
                                          BorderThickness="1"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Amount:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <TextBox x:Name="txtExpenseAmount" Width="300" Padding="10" FontSize="14" 
-                                         Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E" 
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Amount:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <TextBox x:Name="txtExpenseAmount" 
+                                         Width="380" 
+                                         Padding="12" 
+                                         FontSize="14"
+                                         Background="#FF2D3250" 
+                                         Foreground ="White" 
+                                         BorderBrush="#FF3E3E3E"
                                          BorderThickness="1"/>
                             </StackPanel>
 
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Payer:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <ComboBox x:Name="cmbPayer" Width="300" Padding="5" FontSize="14" 
-                                    Background="#FF2D3250" Foreground="Black" BorderBrush="#FF3E3E3E" 
-                                    BorderThickness="1" SelectionChanged="cmbPayer_SelectionChanged">
-                                </ComboBox>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Payer:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <ComboBox x:Name="cmbPayer" 
+                                          Width="380" 
+                                          Padding="8" 
+                                          FontSize="14"
+                                          Background="#FF2D3250" 
+                                          Foreground ="Black" 
+                                          BorderBrush="#FF3E3E3E"
+                                          BorderThickness="1" 
+                                          SelectionChanged="cmbPayer_SelectionChanged"/>
                             </StackPanel>
 
-                            <Button Content="Add Expense" Width="150" Padding="10" FontSize="14" 
-                                    Background="#FF4CAF50" Foreground="White" BorderBrush="Transparent" 
-                                    HorizontalAlignment="Center" Click="AddExpense_Click" Cursor="Hand"/>
+                            <Button Content="Add Expense" 
+                                    Width="200" 
+                                    Padding="12" 
+                                    FontSize="14"
+                                    Background="#FF4CAF50" 
+                                    Foreground ="White" 
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Center" 
+                                    Click="AddExpense_Click" 
+                                    Cursor="Hand"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
             </TabItem>
-
-
 
             <!-- Group Summary Tab -->
             <TabItem Header="Group Summary" Background="Transparent">
-                <Border Background="#FF1A1A2E" Padding="20" CornerRadius="10" Margin="10">
+                <Border Background="#FF1A1A2E" Padding="25" CornerRadius="10" Margin="10">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <!-- Header -->
-                            <TextBlock Text="Group Summary" 
-                       FontSize="18" 
-                       FontWeight="Bold" 
-                       Foreground="White" 
-                       Margin="0,0,0,20" 
-                       HorizontalAlignment="Center"/>
-                            <Button Content="Export to CSV" Click="ExportToFile_Click" Width="100" Margin="0,0,0,20"/>
+                        <StackPanel Width="900" HorizontalAlignment="Center">
+                            <TextBlock Text="Group Summary"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground ="White"
+                                       Margin="0,0,0,25"
+                                       HorizontalAlignment="Center"/>
+
+                            <!-- Group Selection -->
+                            <StackPanel Margin="0,0,0,20" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Current Group:"
+                                           FontSize="16"
+                                           Foreground ="White"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,15,0"/>
+                                <ComboBox x:Name="cmbCurrentGroup"
+                                          Width="300"
+                                          Padding="8"
+                                          FontSize="14"
+                                          Background="#FF2D3250"
+                                          Foreground ="Black"
+                                          BorderBrush="#FF3E3E3E"
+                                          BorderThickness="1"
+                                          SelectionChanged="cmbCurrentGroup_SelectionChanged"/>
+                            </StackPanel>
+
+                            <!-- Import/Export Buttons -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,25">
+                                <Button Content="Import from CSV"
+                                        Click="ImportFromFile_Click"
+                                        Width="180"
+                                        Margin="0,0,15,0"
+                                        Background="#FF2196F3"
+                                        Foreground ="Black"
+                                        BorderBrush="Transparent"
+                                        Padding="12"/>
+
+                                <Button Content="Export to CSV"
+                                        Click="ExportToFile_Click"
+                                        Width="180"
+                                        Background="#FF4CAF50"
+                                        Foreground ="Black"
+                                        BorderBrush="Transparent"
+                                        Padding="12"/>
+                            </StackPanel>
 
                             <!-- Balances Section -->
-                            <Border Background="#FF2D3250" 
-                    CornerRadius="5" 
-                    Padding="15" 
-                    Margin="0,0,0,20">
+                            <Border Background="#FF2D3250"
+                                    CornerRadius="5"
+                                    Padding="20"
+                                    Margin="0,0,0,25">
                                 <StackPanel>
-                                    <TextBlock Text="Current Balances" 
-                               FontSize="16" 
-                               FontWeight="SemiBold" 
-                               Foreground="White" 
-                               Margin="0,0,0,10" 
-                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Current Balances"
+                                               FontSize="18"
+                                               FontWeight="SemiBold"
+                                               Foreground ="White"
+                                               Margin="0,0,0,15"
+                                               HorizontalAlignment="Center"/>
 
-                                    <ListView x:Name="lstBalances" 
-                              Background="Transparent" 
-                              BorderThickness="0"
-                              Height="Auto"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemContainerStyle>
-                                            <Style TargetType="ListViewItem">
-                                                <Setter Property="Padding" Value="0"/>
-                                                <Setter Property="Margin" Value="0,5"/>
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            </Style>
-                                        </ListView.ItemContainerStyle>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="{Binding MemberName}" 
-                                               Foreground="White"
-                                               VerticalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding Balance, StringFormat={}{0:C2}}"
-                                               Grid.Column="1"
-                                               Margin="10,0,0,0">
-                                                        <TextBlock.Style>
-                                                            <Style TargetType="TextBlock">
-                                                                <Setter Property="Foreground" Value="White"/>
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Balance}" Value="0">
-                                                                        <Setter Property="Foreground" Value="White"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Balance}">
-                                                                        <Setter Property="Foreground" Value="LightGreen"/>
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Balance}" Value="-0.01">
-                                                                        <Setter Property="Foreground" Value="LightCoral"/>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </TextBlock.Style>
-                                                    </TextBlock>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+									<ListView x:Name="lstBalances"
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Height="Auto"
+                                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+										<ListView.ItemContainerStyle>
+											<Style TargetType="ListViewItem">
+												<Setter Property="Padding" Value="0"/>
+												<Setter Property="Margin" Value="0,5"/>
+												<Setter Property="Background" Value="Transparent"/>
+												<Setter Property="BorderThickness" Value="0"/>
+												<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+											</Style>
+										</ListView.ItemContainerStyle>
+										<ListView.ItemTemplate>
+											<DataTemplate>
+												<Grid>
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="*"/>
+														<ColumnDefinition Width="Auto"/>
+													</Grid.ColumnDefinitions>
+													<TextBlock Text="{Binding MemberName}"
+                                                               Foreground="White"
+                                                               VerticalAlignment="Center"/>
+													<TextBlock Text="{Binding Balance, StringFormat={}{0:C2}}"
+                                                               Grid.Column="1"
+                                                               Margin="10,0,0,0">
+														<TextBlock.Style>
+															<Style TargetType="TextBlock">
+																<Setter Property="Foreground" Value="White"/>
+																<Style.Triggers>
+																	<DataTrigger Binding="{Binding Balance}" Value="0">
+																		<Setter Property="Foreground" Value="White"/>
+																	</DataTrigger>
+																	<DataTrigger Binding="{Binding Balance}">
+																		<Setter Property="Foreground" Value="LightGreen"/>
+																	</DataTrigger>
+																	<DataTrigger Binding="{Binding Balance}" Value="-0.01">
+																		<Setter Property="Foreground" Value="LightCoral"/>
+																	</DataTrigger>
+																</Style.Triggers>
+															</Style>
+														</TextBlock.Style>
+													</TextBlock>
+												</Grid>
+											</DataTemplate>
+										</ListView.ItemTemplate>
+									</ListView>
                                 </StackPanel>
                             </Border>
 
                             <!-- Expense History Section -->
-                            <Border Background="#FF2D3250" 
-                    CornerRadius="5" 
-                    Padding="15" 
-                    Margin="0,0,0,20">
+                            <Border Background="#FF1A1A2E" 
+                                    CornerRadius="5" 
+                                    Padding="20" 
+                                    Margin="0,0,0,25">
                                 <StackPanel>
-                                    <TextBlock Text="Expense History" 
-                               FontSize="16" 
-                               FontWeight="SemiBold" 
-                               Foreground="White" 
-                               Margin="0,0,0,10" 
-                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Expense History"
+                                               FontSize="18"
+                                               FontWeight="SemiBold"
+                                               Foreground ="White"
+                                               Margin="0,0,0,15"
+                                               HorizontalAlignment="Center"/>
 
-                                    <ListView x:Name="lstExpenses" 
-                              Background="Transparent" 
-                              BorderThickness="0"
-                              Height="Auto"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemContainerStyle>
-                                            <Style TargetType="ListViewItem">
-                                                <Setter Property="Padding" Value="0"/>
-                                                <Setter Property="Margin" Value="0,5"/>
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            </Style>
-                                        </ListView.ItemContainerStyle>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border Padding="5" BorderBrush="#FF444444" BorderThickness="0,0,0,1">
-                                                    <StackPanel Margin="0,5">
-                                                        <TextBlock Text="{Binding Description}" 
-                                                   FontWeight="Bold" 
-                                                   Foreground="White"
-                                                   Margin="0,0,0,5"/>
-                                                        <StackPanel Orientation="Horizontal" 
-                                                    Margin="0,0,0,5">
-                                                            <TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}" 
-                                                       Foreground="#FFAAAAAA" 
-                                                       Margin="0,0,15,0"/>
-                                                            <TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}" 
-                                                       Foreground="#FFAAAAAA"/>
-                                                        </StackPanel>
-                                                        <TextBlock Text="{Binding Date, StringFormat='Date: {0:MMM dd, yyyy}'}" 
-                                                   Foreground="#FF888888" 
-                                                   FontSize="11"/>
-                                                    </StackPanel>
-                                                </Border>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+									<ListView x:Name="lstExpenses"
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Height="Auto"
+                                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+										<ListView.ItemContainerStyle>
+											<Style TargetType="ListViewItem">
+												<Setter Property="Padding" Value="0"/>
+												<Setter Property="Margin" Value="0,5"/>
+												<Setter Property="Background" Value="Transparent"/>
+												<Setter Property="BorderThickness" Value="0"/>
+												<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+											</Style>
+										</ListView.ItemContainerStyle>
+										<ListView.ItemTemplate>
+											<DataTemplate>
+												<Border Padding="5" BorderBrush="#FF444444" BorderThickness="0,0,0,1">
+													<StackPanel Margin="0,5">
+														<TextBlock Text="{Binding Description}"
+                                                                   FontWeight="Bold"
+                                                                   Foreground="White"
+                                                                   Margin="0,0,0,5"/>
+														<StackPanel Orientation="Horizontal"
+                                                                    Margin="0,0,0,5">
+															<TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}"
+                                                                       Foreground="#FFAAAAAA"
+                                                                       Margin="0,0,15,0"/>
+															<TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}"
+                                                                       Foreground="#FFAAAAAA"/>
+														</StackPanel>
+														<TextBlock Text="{Binding Date, StringFormat='Date: {0:MMM dd, yyyy}'}"
+                                                                   Foreground="#FF888888"
+                                                                   FontSize="11"/>
+													</StackPanel>
+												</Border>
+											</DataTemplate>
+										</ListView.ItemTemplate>
+									</ListView>
                                 </StackPanel>
                             </Border>
 
                             <!-- Transaction History Section -->
-                            <Border Background="#FF2D3250" 
-                    CornerRadius="5" 
-                    Padding="15">
+                            <Border Background="#FF1A1A2E" 
+                                    CornerRadius="5" 
+                                    Padding="20">
                                 <StackPanel>
-                                    <TextBlock Text="Transaction History" 
-                               FontSize="16" 
-                               FontWeight="SemiBold" 
-                               Foreground="White" 
-                               Margin="0,0,0,10" 
-                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Transaction History"
+                                               FontSize="18"
+                                               FontWeight="SemiBold"
+                                               Foreground ="White"
+                                               Margin="0,0,0,15"
+                                               HorizontalAlignment="Center"/>
 
-                                    <ListView x:Name="lstTransactionHistory" 
-                              Background="Transparent" 
-                              BorderThickness="0"
-                              Height="Auto"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemContainerStyle>
-                                            <Style TargetType="ListViewItem">
-                                                <Setter Property="Padding" Value="0"/>
-                                                <Setter Property="Margin" Value="0,5"/>
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Setter Property="BorderThickness" Value="0"/>
-                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            </Style>
-                                        </ListView.ItemContainerStyle>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border Padding="5" BorderBrush="#FF444444" BorderThickness="0,0,0,1">
-                                                    <StackPanel Margin="0,5">
-                                                        <TextBlock Text="{Binding Description}" 
-                                                   Foreground="White"
-                                                   Margin="0,0,0,5"/>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}" 
-                                                       Foreground="White" 
-                                                       Margin="0,0,15,0"/>
-                                                            <TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}" 
-                                                       Foreground="White"/>
-                                                            <TextBlock Text="{Binding Payee.Name, StringFormat='→ {0}'}" 
-                                                       Foreground="White" 
-                                                       Margin="5,0,0,0"
-                                                       />
-                                                        </StackPanel>
-                                                        <TextBlock Text="{Binding Date, StringFormat='Date: {0:MM/dd/yyyy}'}" 
-                                                   Foreground="#FF888888" 
-                                                   FontSize="11"
-                                                   Margin="0,5,0,0"/>
-                                                    </StackPanel>
-                                                </Border>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+									<ListView x:Name="lstTransactionHistory"
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Height="Auto"
+                                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+										<ListView.ItemContainerStyle>
+											<Style TargetType="ListViewItem">
+												<Setter Property="Padding" Value="0"/>
+												<Setter Property="Margin" Value="0,5"/>
+												<Setter Property="Background" Value="Transparent"/>
+												<Setter Property="BorderThickness" Value="0"/>
+												<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+											</Style>
+										</ListView.ItemContainerStyle>
+										<ListView.ItemTemplate>
+											<DataTemplate>
+												<Border Padding="5" BorderBrush="#FF444444" BorderThickness="0,0,0,1">
+													<StackPanel Margin="0,5">
+														<TextBlock Text="{Binding Description}"
+                                                                   Foreground="White"
+                                                                   Margin="0,0,0,5"/>
+														<StackPanel Orientation="Horizontal">
+															<TextBlock Text="{Binding Amount, StringFormat='Amount: {0:C2}'}"
+                                                                       Foreground="White"
+                                                                       Margin="0,0,15,0"/>
+															<TextBlock Text="{Binding Payer.Name, StringFormat='Paid by: {0}'}"
+                                                                       Foreground="White"/>
+															<TextBlock Text="{Binding Payee.Name, StringFormat='→ {0}'}"
+                                                                       Foreground="White"
+                                                                       Margin="5,0,0,0"
+                                                                       />
+														</StackPanel>
+														<TextBlock Text="{Binding Date, StringFormat='Date: {0:MM/dd/yyyy}'}"
+                                                                   Foreground="#FF888888"
+                                                                   FontSize="11"
+                                                                   Margin="0,5,0,0"/>
+													</StackPanel>
+												</Border>
+											</DataTemplate>
+										</ListView.ItemTemplate>
+									</ListView>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
             </TabItem>
+
             <!-- Settle Up Tab -->
             <TabItem Header="Settle Up" Background="Transparent">
-                <Border Background="#FF1A1A2E" Padding="20" CornerRadius="10" Margin="10">
+                <Border Background="#FF1A1A2E" Padding="25" CornerRadius="10" Margin="10">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock Text="Settle Up" FontSize="18" FontWeight="Bold" 
-                           Foreground="White" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                        <StackPanel Width="400" HorizontalAlignment="Center">
+                            <TextBlock Text="Settle Up" 
+                                       FontSize="20" 
+                                       FontWeight="Bold"
+                                       Foreground ="White" 
+                                       Margin="0,0,0,25" 
+                                       HorizontalAlignment="Center"/>
 
                             <!-- Group Selection -->
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Select Group:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <ComboBox x:Name="cmbSettleGroup" Width="300" Padding="5" FontSize="14"
-                              Background="#FF2D3250" Foreground="Black" BorderBrush="#FF3E3E3E"
-                              BorderThickness="1" SelectionChanged="cmbSettleGroup_SelectionChanged"/>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Select Group:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <ComboBox x:Name="cmbSettleGroup" 
+                                          Width="380" 
+                                          Padding="8" 
+                                          FontSize="14"
+                                          Background="#FF2D3250" 
+                                          Foreground ="Black" 
+                                          BorderBrush="#FF3E3E3E"
+                                          BorderThickness="1" 
+                                          SelectionChanged="cmbSettleGroup_SelectionChanged"/>
                             </StackPanel>
 
                             <!-- Payer Selection -->
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Who is Paying:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <ComboBox x:Name="cmbSettlePayer" Width="300" Padding="5" FontSize="14"
-                              Background="#FF2D3250" Foreground="Black" BorderBrush="#FF3E3E3E"
-                              BorderThickness="1"/>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Who is Paying:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <ComboBox x:Name="cmbSettlePayer" 
+                                          Width="380" 
+                                          Padding="8" 
+                                          FontSize="14"
+                                          Background="#FF2D3250" 
+                                          Foreground ="Black" 
+                                          BorderBrush="#FF3E3E3E"
+                                          BorderThickness="1"/>
                             </StackPanel>
 
                             <!-- Payee Selection -->
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Who is Receiving:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <ComboBox x:Name="cmbSettlePayee" Width="300" Padding="5" FontSize="14"
-                              Background="#FF2D3250" Foreground="Black" BorderBrush="#FF3E3E3E"
-                              BorderThickness="1"/>
+                            <StackPanel Margin="0,0,0,20">
+                                <TextBlock Text="Who is Receiving:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <ComboBox x:Name="cmbSettlePayee" 
+                                          Width="380" 
+                                          Padding="8" 
+                                          FontSize="14"
+                                          Background="#FF2D3250" 
+                                          Foreground ="Black" 
+                                          BorderBrush="#FF3E3E3E"
+                                          BorderThickness="1"/>
                             </StackPanel>
 
                             <!-- Amount -->
-                            <StackPanel Margin="0,0,0,15">
-                                <TextBlock Text="Amount:" FontSize="14" Foreground="White" Margin="0,0,0,5"/>
-                                <TextBox x:Name="txtSettleAmount" Width="300" Padding="10" FontSize="14"
-                             Background="#FF2D3250" Foreground="White" BorderBrush="#FF3E3E3E"
-                             BorderThickness="1"/>
+                            <StackPanel Margin="0,0,0,25">
+                                <TextBlock Text="Amount:" 
+                                           FontSize="16" 
+                                           Foreground ="White" 
+                                           Margin="0,0,0,8"/>
+                                <TextBox x:Name="txtSettleAmount" 
+                                         Width="380" 
+                                         Padding="12" 
+                                         FontSize="14"
+                                         Background="#FF2D3250" 
+                                         Foreground ="White" 
+                                         BorderBrush="#FF3E3E3E"
+                                         BorderThickness="1"/>
                             </StackPanel>
 
                             <!-- Settle Button -->
-                            <Button Content="Settle Payment" Width="150" Padding="10" FontSize="14" 
-                        Background="#FF9C27B0" Foreground="White" BorderBrush="Transparent" 
-                        HorizontalAlignment="Center" Click="SettlePayment_Click" Cursor="Hand"/>
+                            <Button Content="Settle Payment" 
+                                    Width="200" 
+                                    Padding="12" 
+                                    FontSize="14"
+                                    Background="#FF9C27B0" 
+                                    Foreground ="White" 
+                                    BorderBrush="Transparent"
+                                    HorizontalAlignment="Center" 
+                                    Click="SettlePayment_Click" 
+                                    Cursor="Hand"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>

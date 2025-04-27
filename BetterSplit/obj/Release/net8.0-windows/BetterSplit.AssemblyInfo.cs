@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BetterSplit")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00f210051740ff982f2ab92cd2539b75206cb63d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BetterSplit")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BetterSplit")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

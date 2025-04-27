@@ -16,11 +16,11 @@ namespace BetterSplit
         private Group _currentGroup;
         private List<Group> _allGroups = new List<Group>();
 
-
         public DashboardPage()
         {
             InitializeComponent();
             InitializeNewGroupState();
+            RefreshCurrentGroupComboBox();
         }
 
         private void InitializeNewGroupState()
@@ -34,28 +34,54 @@ namespace BetterSplit
 
         private void LoadPayerOptions()
         {
-            cmbPayer.Items.Clear(); // Clear any previous items
+            cmbPayer.Items.Clear();
 
             if (_currentGroup?.Members != null)
             {
-                // Add members to ComboBox
                 foreach (var member in _currentGroup.Members)
                 {
                     cmbPayer.Items.Add(member);
                 }
 
-                // Set the DisplayMemberPath to 'Name' so it shows member names
                 cmbPayer.DisplayMemberPath = "Name";
 
-                // Set the selected index if there are items in the ComboBox
                 if (cmbPayer.Items.Count > 0)
                 {
-                    cmbPayer.SelectedIndex = 0; // Set the first item as selected
+                    cmbPayer.SelectedIndex = 0;
                 }
 
-                // Update the balance display after loading payer options
                 LoadBalanceDisplay();
             }
+        }
+
+        private void RefreshCurrentGroupComboBox()
+        {
+            cmbCurrentGroup.ItemsSource = null;
+            cmbCurrentGroup.ItemsSource = _allGroups;
+            cmbCurrentGroup.DisplayMemberPath = "Name";
+
+            if (_currentGroup != null)
+            {
+                cmbCurrentGroup.SelectedItem = _currentGroup;
+            }
+        }
+
+        private void cmbCurrentGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbCurrentGroup.SelectedItem is Group selectedGroup)
+            {
+                _currentGroup = selectedGroup;
+                LoadGroupData();
+            }
+        }
+
+        private void LoadGroupData()
+        {
+            if (_currentGroup == null) return;
+
+            LoadPayerOptions();
+            UpdateHistories();
+            RefreshSettleGroupComboBox();
         }
 
         private void AddExpense_Click(object sender, RoutedEventArgs e)
@@ -88,12 +114,11 @@ namespace BetterSplit
                 _currentGroup.Expenses.Add(expense);
 
                 var transaction = new Transaction(
-                $"Expense: {expense.Description}",
-                expense.Amount,
-                expense.Payer,
-                null);  // No direct payee for expenses
+                    $"Expense: {expense.Description}",
+                    expense.Amount,
+                    expense.Payer,
+                    null);
                 _currentGroup.Transactions.Add(transaction);
-
 
                 UpdateBalances();
                 UpdateHistories();
@@ -105,8 +130,6 @@ namespace BetterSplit
                 ShowErrorMessage($"An error occurred: {ex.Message}");
             }
         }
-
-
 
         private void SetMembers_Click(object sender, RoutedEventArgs e)
         {
@@ -140,7 +163,7 @@ namespace BetterSplit
                         Foreground = Brushes.White,
                         BorderBrush = Brushes.Gray,
                         FontSize = 14,
-                        Tag = i // Store index for validation
+                        Tag = i
                     };
 
                     stackPanel.Children.Add(textBox);
@@ -157,16 +180,13 @@ namespace BetterSplit
         {
             try
             {
-                // Get the selected member who is settling up
                 var selectedMember = (Member)cmbPayer.SelectedItem;
 
                 if (selectedMember.Balance != 0)
                 {
-                    // Settle the balance
                     decimal amountToSettle = selectedMember.Balance;
-                    selectedMember.Balance = 0;  // Set the balance to 0 after paying
+                    selectedMember.Balance = 0;
 
-                    // Display a success message
                     ShowSuccessMessage($"Member {selectedMember.Name} has settled up the balance of {amountToSettle:C2}");
                 }
                 else
@@ -174,7 +194,6 @@ namespace BetterSplit
                     ShowErrorMessage("The selected member has no outstanding balance to settle.");
                 }
 
-                // Update the balance display
                 LoadBalanceDisplay();
             }
             catch (Exception ex)
@@ -214,11 +233,12 @@ namespace BetterSplit
                     return;
                 }
 
-                // Initialize the group with members
                 _currentGroup = new Group
                 {
                     Name = txtGroupName.Text.Trim(),
-                    Members = new List<Member>()
+                    Members = new List<Member>(),
+                    Expenses = new List<Expense>(),
+                    Transactions = new List<Transaction>()
                 };
 
                 foreach (var name in memberNames)
@@ -226,10 +246,9 @@ namespace BetterSplit
                     _currentGroup.Members.Add(new Member(name));
                 }
 
-                // Add the group to the list
                 _allGroups.Add(_currentGroup);
 
-                // Refresh Settle Group combo box
+                RefreshCurrentGroupComboBox();
                 RefreshSettleGroupComboBox();
 
                 LoadPayerOptions();
@@ -264,7 +283,6 @@ namespace BetterSplit
 
         private void UpdateBalances()
         {
-            // Simply load the balance display after expenses have been updated
             LoadBalanceDisplay();
         }
 
@@ -272,7 +290,6 @@ namespace BetterSplit
         {
             if (cmbPayer.SelectedItem is Member selectedMember)
             {
-                // Display the selected member's name
                 MessageBox.Show($"Selected Payer: {selectedMember.Name}");
             }
         }
@@ -281,7 +298,7 @@ namespace BetterSplit
         {
             txtExpenseName.Clear();
             txtExpenseAmount.Clear();
-            cmbPayer.SelectedIndex = 0;  // Reset the payer selection to the first item
+            cmbPayer.SelectedIndex = 0;
         }
 
         private void ShowSuccessMessage(string message)
@@ -293,6 +310,7 @@ namespace BetterSplit
         {
             MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
         private void cmbSettleGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedGroup = cmbSettleGroup.SelectedItem as Group;
@@ -305,6 +323,7 @@ namespace BetterSplit
                 cmbSettlePayee.DisplayMemberPath = "Name";
             }
         }
+
         private void SettlePayment_Click(object sender, RoutedEventArgs e)
         {
             var group = cmbSettleGroup.SelectedItem as Group;
@@ -329,32 +348,29 @@ namespace BetterSplit
                 return;
             }
 
-            // Perform settlement
             payer.Balance += amount;
             payee.Balance -= amount;
 
-            MessageBox.Show("Payment settled successfully!");
-
             var transaction = new Transaction(
-            $"Settlement from {payer.Name} to {payee.Name}",
-            amount,
-            payer,
-            payee);
-            _currentGroup.Transactions.Add(transaction);
+                $"Settlement from {payer.Name} to {payee.Name}",
+                amount,
+                payer,
+                payee);
 
-            UpdateHistories();
+            group.Transactions.Add(transaction);
 
-            // Clear fields
-            txtSettleAmount.Text = "";
-            cmbSettlePayer.SelectedItem = null;
-            cmbSettlePayee.SelectedItem = null; 
-
-            // Update the displayed balances
             if (_currentGroup == group)
             {
-                LoadBalanceDisplay();
+                UpdateHistories();
             }
+
+            txtSettleAmount.Text = "";
+            cmbSettlePayer.SelectedItem = null;
+            cmbSettlePayee.SelectedItem = null;
+
+            MessageBox.Show("Payment settled successfully!");
         }
+
         private void SplitExpenseEqually(Expense expense)
         {
             decimal share = expense.Amount / _currentGroup.Members.Count;
@@ -363,32 +379,27 @@ namespace BetterSplit
             {
                 if (member != expense.Payer)
                 {
-                    // Each non-payer member owes their share to the payer
                     member.Balance -= share;
                     expense.Payer.Balance += share;
                 }
             }
         }
+
         private void UpdateHistories()
         {
-            // Update expense history
             lstExpenses.ItemsSource = null;
             lstExpenses.ItemsSource = _currentGroup.Expenses;
 
-            // Update transaction history
             lstTransactionHistory.ItemsSource = null;
             lstTransactionHistory.ItemsSource = _currentGroup.Transactions
                 .OrderByDescending(t => t.Date)
                 .ToList();
 
-            // Update balances
             LoadBalanceDisplay();
         }
 
-        // Export expenses and balances to a CSV file
         private void ExportToFile_Click(object sender, RoutedEventArgs e)
         {
-            // Open Save File Dialog
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Filter = "CSV Files (*.csv)|*.csv",
@@ -401,7 +412,6 @@ namespace BetterSplit
                 string filePath = saveFileDialog.FileName;
                 try
                 {
-                    // Call the method to export data
                     ExportDataToCsv(filePath);
                     MessageBox.Show("Data exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
@@ -416,7 +426,9 @@ namespace BetterSplit
         {
             StringBuilder csvContent = new StringBuilder();
 
-            // Add CSV headers
+            // Add group metadata
+            csvContent.AppendLine($"Group Name: {_currentGroup.Name}");
+            csvContent.AppendLine($"Member Count: {_currentGroup.Members.Count}");
             csvContent.AppendLine("Description,Amount,Payer,Member,Share");
 
             // Export Expenses and Shares
@@ -429,14 +441,123 @@ namespace BetterSplit
                 }
             }
 
-            // Write to file
             File.WriteAllText(filePath, csvContent.ToString(), Encoding.UTF8);
+        }
+
+        private void ImportFromFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "CSV Files (*.csv)|*.csv",
+                DefaultExt = ".csv"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                try
+                {
+                    ImportDataFromCsv(filePath);
+                    MessageBox.Show("Data imported successfully!", "Import", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error importing data: {ex.Message}", "Import Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void ImportDataFromCsv(string filePath)
+        {
+            var lines = File.ReadAllLines(filePath);
+            if (lines.Length == 0) return;
+
+            string groupName = "Imported Group";
+            int memberCount = 0;
+
+            // Parse metadata lines
+            if (lines[0].StartsWith("Group Name:"))
+            {
+                groupName = lines[0].Substring("Group Name:".Length).Trim();
+                lines = lines.Skip(1).ToArray();
+            }
+
+            if (lines[0].StartsWith("Member Count:"))
+            {
+                int.TryParse(lines[0].Substring("Member Count:".Length).Trim(), out memberCount);
+                lines = lines.Skip(1).ToArray();
+            }
+
+            // Skip header row
+            var dataRows = lines.Skip(1).ToList();
+
+            InitializeNewGroupState();
+            _currentGroup = new Group
+            {
+                Name = groupName,
+                Expenses = new List<Expense>(),
+                Transactions = new List<Transaction>()
+            };
+
+            var expenseGroups = dataRows
+                .Select(row => row.Split(','))
+                .GroupBy(fields => fields[0]);
+
+            var firstExpenseData = expenseGroups.First().First();
+            var memberNames = expenseGroups.First()
+                .Select(fields => fields[3])
+                .Distinct()
+                .ToList();
+
+            _currentGroup.Members = memberNames.Select(name => new Member(name)).ToList();
+
+            foreach (var expenseGroup in expenseGroups)
+            {
+                var firstRow = expenseGroup.First();
+                decimal amount = decimal.Parse(firstRow[1]);
+                string payerName = firstRow[2].Trim('"');
+                var payer = _currentGroup.Members.First(m => m.Name == payerName);
+
+                var expense = new Expense(firstRow[0], amount, payer);
+                _currentGroup.Expenses.Add(expense);
+
+                var transaction = new Transaction(
+                    $"Expense: {expense.Description}",
+                    expense.Amount,
+                    expense.Payer,
+                    null);
+                _currentGroup.Transactions.Add(transaction);
+            }
+
+            foreach (var expense in _currentGroup.Expenses)
+            {
+                SplitExpenseEqually(expense);
+            }
+
+            _allGroups.Add(_currentGroup);
+            RefreshCurrentGroupComboBox();
+            RefreshSettleGroupComboBox();
+
+            txtGroupName.Text = _currentGroup.Name;
+            txtNumMembers.Text = _currentGroup.Members.Count.ToString();
+            LoadPayerOptions();
+            UpdateHistories();
         }
 
         private string EscapeCsv(string input)
         {
             if (string.IsNullOrEmpty(input)) return input;
             if (input.Contains(",")) return $"\"{input}\"";
+            return input;
+        }
+
+        private string UnescapeCsv(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            if (input.StartsWith("\"") && input.EndsWith("\""))
+            {
+                return input.Substring(1, input.Length - 2);
+            }
             return input;
         }
     }

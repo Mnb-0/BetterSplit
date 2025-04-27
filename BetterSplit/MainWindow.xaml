@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BetterSplit.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BetterSplit" Height="450" Width="400"
+        Title="BetterSplit" Width="1024" Height="768"   
         WindowStartupLocation="CenterScreen"
         Background="#FF2D3250">
     <Grid>
