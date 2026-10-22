@@ -1,1 +1,6 @@
-/.vs
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+users.txt
